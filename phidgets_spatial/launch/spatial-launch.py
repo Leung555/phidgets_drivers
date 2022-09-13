@@ -17,6 +17,9 @@
 import launch
 from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
 
 
 def generate_launch_description():
@@ -34,5 +37,11 @@ def generate_launch_description():
             ],
             output='both',
     )
+    imu_filter_madgwick_node = Node(
+        package='imu_filter_madgwick',
+        # namespace='turtlesim1',
+        executable='imu_filter_madgwick_node',
+        name='imu_filter_madgwick'
+    )
 
-    return launch.LaunchDescription([container])
+    return launch.LaunchDescription([container, imu_filter_madgwick_node])
